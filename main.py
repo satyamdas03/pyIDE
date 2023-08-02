@@ -3,6 +3,7 @@ compiler = Tk()
 compiler.title("myVSC")
 
 def run():
+    code = editor.get('1.0', END)
     print("code will get executed")
 
 menu_bar = Menu(compiler)
