@@ -7,7 +7,7 @@ def run():
 
 menu_bar = Menu(compiler)
 run_bar = Menu(menu_bar, tearoff=0)
-run_bar.add_command(label="RUN")
+run_bar.add_command(label="RUN", command=run)
 menu_bar.add_cascade(label="RUN", menu=run_bar)
 compiler.config(menu=menu_bar)
 
