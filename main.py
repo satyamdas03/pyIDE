@@ -4,7 +4,7 @@ compiler.title("myVSC")
 
 def run():
     code = editor.get('1.0', END)
-    print("code will get executed")
+    print(code)
 
 menu_bar = Menu(compiler)
 run_bar = Menu(menu_bar, tearoff=0)
