@@ -1,1 +1,2 @@
-# ss
+from tkinter import *;
+compiler = Tk()
