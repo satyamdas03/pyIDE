@@ -1,7 +1,13 @@
 from tkinter import *;
+from tkinter.filedialog import asksaveasfilename
 compiler = Tk()
 compiler.title("myVSC")
 
+def save_as():
+    path = asksaveasfilename(filetypes=[('Python Files', '*.py')])
+    with open(path, 'w') as file:
+        code = editor.get('1.0', END)
+        file.write(code)
 def run():
     code = editor.get('1.0', END)
     # print(code)
@@ -12,7 +18,7 @@ menu_bar = Menu(compiler)
 file_menu = Menu(menu_bar, tearoff=0)
 file_menu.add_command(label="Open", command=run)
 file_menu.add_command(label="Save", command=run)
-file_menu.add_command(label="Save As", command=run)
+file_menu.add_command(label="Save As", command=save_as)
 file_menu.add_command(label="Exit", command=exit)
 menu_bar.add_cascade(label="File", menu=file_menu)
 
