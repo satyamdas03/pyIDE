@@ -4,7 +4,8 @@ compiler.title("myVSC")
 
 def run():
     code = editor.get('1.0', END)
-    print(code)
+    # print(code)
+    exec(code)
 
 menu_bar = Menu(compiler)
 run_bar = Menu(menu_bar, tearoff=0)
@@ -16,4 +17,3 @@ compiler.config(menu=menu_bar)
 editor = Text()
 editor.pack()
 compiler.mainloop()
-# ds
