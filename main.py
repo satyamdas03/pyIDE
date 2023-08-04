@@ -48,5 +48,9 @@ compiler.config(menu=menu_bar)
 
 editor = Text()
 editor.pack()
+
+code_output = Text()
+code_output.pack()
+
 compiler.mainloop()
 # will be back shortly
