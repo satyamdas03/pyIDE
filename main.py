@@ -27,10 +27,16 @@ def save_as():
         file.write(code)
         set_file_path(path)
 def run():
+    if file_path == '':
+        save_prompt = Toplevel()
+        text = Label(save_prompt, text='code save bhi karna hota hai')
+        text.pack()
+        return
     command = f'python {file_path}'
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell= True)
     output, error = process.communicate()
     code_output.insert('1.0', output)
+    code_output.insert('1.0', error)
 
 menu_bar = Menu(compiler)
 
