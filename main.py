@@ -8,6 +8,12 @@ def save_as():
     with open(path, 'w') as file:
         code = editor.get('1.0', END)
         file.write(code)
+
+def save_as():
+    path = asksaveasfilename(filetypes=[('Python Files', '*.py')])
+    with open(path, 'w') as file:
+        code = editor.get('1.0', END)
+        file.write(code)
 def run():
     code = editor.get('1.0', END)
     # print(code)
