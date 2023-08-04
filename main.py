@@ -1,5 +1,6 @@
 from tkinter import *;
 from tkinter.filedialog import asksaveasfilename, askopenfilename
+import subprocess
 compiler = Tk()
 compiler.title("myVSC")
 file_path = ''
@@ -26,8 +27,10 @@ def save_as():
         file.write(code)
         set_file_path(path)
 def run():
-    code = editor.get('1.0', END)
-    exec(code)
+    command = f'python {file_path}'
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell= True)
+    output, error = process.communicate()
+    code_output.insert('1.0', output)
 
 menu_bar = Menu(compiler)
 
@@ -49,7 +52,7 @@ compiler.config(menu=menu_bar)
 editor = Text()
 editor.pack()
 
-code_output = Text()
+code_output = Text(height=10)
 code_output.pack()
 
 compiler.mainloop()
