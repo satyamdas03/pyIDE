@@ -1,6 +1,77 @@
-from tkinter import *;
+# from tkinter import *;
+# from tkinter.filedialog import asksaveasfilename, askopenfilename
+# import subprocess
+# compiler = Tk()
+# compiler.title("myVSC")
+# file_path = ''
+#
+# def set_file_path(path):
+#     global file_path
+#     file_path = path
+#
+# def open_file():
+#     path = askopenfilename(filetypes=[('Python Files', '*.py')])
+#     with open(path, 'r') as file:
+#         code = file.read()
+#         editor.delete('1.0', END)
+#         editor.insert('1.0', code)
+#         set_file_path(path)
+#
+# def save_as():
+#     if file_path == '':
+#         path = asksaveasfilename(filetypes=[('Python Files', '*.py')])
+#     else:
+#         path = file_path
+#     with open(path, 'w') as file:
+#         code = editor.get('1.0', END)
+#         file.write(code)
+#         set_file_path(path)
+# def run():
+#     if file_path == '':
+#         save_prompt = Toplevel()
+#         text = Label(save_prompt, text='code save bhi karna hota hai')
+#         text.pack()
+#         return
+#     command = f'python {file_path}'
+#     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell= True)
+#     output, error = process.communicate()
+#     code_output.insert('1.0', output)
+#     code_output.insert('1.0', error)
+#
+# menu_bar = Menu(compiler)
+#
+# file_menu = Menu(menu_bar, tearoff=0)
+# file_menu.add_command(label="Open", command=open_file)
+# file_menu.add_command(label="Save", command=save_as)
+# file_menu.add_command(label="Save As", command=save_as)
+# file_menu.add_command(label="Exit", command=exit)
+# menu_bar.add_cascade(label="File", menu=file_menu)
+#
+# run_bar = Menu(menu_bar, tearoff=0)
+# run_bar.add_command(label="RUN", command=run)
+# menu_bar.add_cascade(label="RUN", menu=run_bar)
+#
+#
+# compiler.config(menu=menu_bar)
+#
+#
+# editor = Text()
+# editor.pack()
+#
+# code_output = Text(height=10)
+# code_output.pack()
+#
+# compiler.mainloop()
+#
+
+from tkinter import *
 from tkinter.filedialog import asksaveasfilename, askopenfilename
 import subprocess
+
+BACKGROUND_COLOR = "#1E1E1E"
+TEXT_COLOR = "#FFFFFF"
+HIGHLIGHT_COLOR = "#404040"
+
 compiler = Tk()
 compiler.title("myVSC")
 file_path = ''
@@ -26,6 +97,7 @@ def save_as():
         code = editor.get('1.0', END)
         file.write(code)
         set_file_path(path)
+
 def run():
     if file_path == '':
         save_prompt = Toplevel()
@@ -33,32 +105,43 @@ def run():
         text.pack()
         return
     command = f'python {file_path}'
-    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell= True)
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     output, error = process.communicate()
     code_output.insert('1.0', output)
     code_output.insert('1.0', error)
 
-menu_bar = Menu(compiler)
+# Configure dark mode color scheme
+compiler.configure(bg=BACKGROUND_COLOR)
+editor = Text(compiler, bg=BACKGROUND_COLOR, fg=TEXT_COLOR)
+code_output = Text(compiler, height=10, bg=BACKGROUND_COLOR, fg=TEXT_COLOR)
+menu_bar = Menu(compiler, bg=BACKGROUND_COLOR, fg=TEXT_COLOR)
+file_menu = Menu(menu_bar, tearoff=0, bg=BACKGROUND_COLOR, fg=TEXT_COLOR)
+run_bar = Menu(menu_bar, tearoff=0, bg=BACKGROUND_COLOR, fg=TEXT_COLOR)
 
-file_menu = Menu(menu_bar, tearoff=0)
+compiler.option_add('*TButton*highlightBackground', HIGHLIGHT_COLOR)
+compiler.option_add('*TButton*highlightColor', HIGHLIGHT_COLOR)
+compiler.option_add('*TButton*background', BACKGROUND_COLOR)
+compiler.option_add('*TButton*foreground', TEXT_COLOR)
+compiler.option_add('*TButton*borderWidth', 0)
+
+# Other dark mode configurations for menus and labels
+
+# ... (Add similar configurations for other widgets)
+
+compiler.config(menu=menu_bar)
+
+# File Menu
+menu_bar.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="Open", command=open_file)
 file_menu.add_command(label="Save", command=save_as)
 file_menu.add_command(label="Save As", command=save_as)
 file_menu.add_command(label="Exit", command=exit)
-menu_bar.add_cascade(label="File", menu=file_menu)
 
-run_bar = Menu(menu_bar, tearoff=0)
+# Run Menu
+menu_bar.add_cascade(label="Run", menu=run_bar)
 run_bar.add_command(label="RUN", command=run)
-menu_bar.add_cascade(label="RUN", menu=run_bar)
 
-
-compiler.config(menu=menu_bar)
-
-
-editor = Text()
 editor.pack()
-
-code_output = Text(height=10)
 code_output.pack()
 
 compiler.mainloop()
