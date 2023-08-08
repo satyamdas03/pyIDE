@@ -58,9 +58,6 @@ compiler.option_add('*TButton*background', BACKGROUND_COLOR)
 compiler.option_add('*TButton*foreground', TEXT_COLOR)
 compiler.option_add('*TButton*borderWidth', 0)
 
-# Other dark mode configurations for menus and labels
-
-# ... (Add similar configurations for other widgets)
 
 compiler.config(menu=menu_bar)
 
